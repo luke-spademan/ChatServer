@@ -43,7 +43,8 @@ def main():
     print("Waiting for connections on %s:%s" % (host, str(port)))
     s.listen(1)  # waits for connection from a client
     c, addr = s.accept()  # gets clients ip address
-    print("Connection from: " + str(addr))
+    cname = c.recv(1024).decode("utf-8")
+    print("Connection from %s %s" % (cname, addr[0]))
 
     getMsg = GetMsg(c)
     sendMsg = SendMsg(c, name)
