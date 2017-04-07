@@ -38,7 +38,8 @@ def main():
     name = input("username: ")
     s = socket.socket()
     s.connect((host, port))
-
+    s.send(name.encode("utf-8"))
+    print("Connected to", host)
     getMsg = GetMsg(s)
     sendMsg = SendMsg(s, name)
     getMsg.start()
