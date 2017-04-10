@@ -60,7 +60,7 @@ class SendMsg(threading.Thread):
 
 
 def main():
-    host = "8.8.8.8"
+    host = "0.0.0.0"
     port = 8565
     name = "Server"
 
