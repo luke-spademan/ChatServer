@@ -5,10 +5,11 @@ clients = []
 
 
 class Client(threading.Thread):
-    def __init__(self, c, i):
+    def __init__(self, c, i, name):
         threading.Thread.__init__(self)
         self.c = c
         self.i = i
+        self.name = name
 
     def GetMsg(self):
         while True:
@@ -16,6 +17,7 @@ class Client(threading.Thread):
             if not data:
                 break
             else:
+                data = "%s: %s" % (self.name, data)
                 print(data)
                 counter = 0
                 for client in clients:
@@ -39,7 +41,7 @@ class GetClient(threading.Thread):
             cname = c.recv(1024).decode("utf-8")
             print("Connection from %s %s" % (cname, addr[0]))
             i = len(clients)
-            clients.append(Client(c, i))
+            clients.append(Client(c, i, cname))
             clients[-1].start()
 
 
