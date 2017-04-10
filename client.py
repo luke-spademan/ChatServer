@@ -17,10 +17,9 @@ class GetMsg(threading.Thread):
 
 
 class SendMsg(threading.Thread):
-    def __init__(self, s, name):
+    def __init__(self, s):
         threading.Thread.__init__(self)
         self.s = s
-        self.name = name
 
     def run(self):
         while True:
@@ -28,7 +27,6 @@ class SendMsg(threading.Thread):
             if data == "q":
                 break
             else:
-                data = "%s: %s" % (self.name, data)
                 self.s.send(data.encode("utf-8"))
 
 
@@ -41,7 +39,7 @@ def main():
     s.send(name.encode("utf-8"))
     print("Connected to", host)
     getMsg = GetMsg(s)
-    sendMsg = SendMsg(s, name)
+    sendMsg = SendMsg(s)
     getMsg.start()
     sendMsg.start()
 
