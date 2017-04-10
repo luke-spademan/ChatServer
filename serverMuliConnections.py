@@ -60,9 +60,9 @@ class SendMsg(threading.Thread):
 
 
 def main():
-    host = input("ip address: ")
-    port = int(input("port: "))
-    name = input("username: ")
+    host = "8.8.8.8"
+    port = 8565
+    name = "Server"
 
     s = socket.socket()
     s.bind((host, port))
